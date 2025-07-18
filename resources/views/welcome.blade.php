@@ -1,132 +1,1007 @@
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $pageGlobalData->setting->site_name ?? 'AgriC' }} | {{ $pageGlobalData->setting->description ?? 'Farming made easy' }}</title>
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset($pageGlobalData->setting->favicon) }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset($pageGlobalData->setting->favicon) }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset($pageGlobalData->setting->favicon) }}">
 
-        <title>Laravel</title>
+    <link rel="manifest" href="frontAssets/images/favicons/site.webmanifest">
+    <meta name="description" content="Agrikon HTML Template For Agriculture Farm & Farmers">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.dark\:text-gray-500{--tw-text-opacity:1;color:#6b7280;color:rgba(107,114,128,var(--tw-text-opacity))}}
-        </style>
 
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/swiper.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/odometer.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/jarallax.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/agrikon-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/nouislider.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/nouislider.pips.css') }}">
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="{{ asset('frontAssets/css/main.css') }}">
+</head>
+
+<body>
+    <div class="preloader">
+        <img 
+            class="preloader__image" 
+            width="55" 
+            src="{{ !empty($pageGlobalData->setting) && $pageGlobalData->setting->favicon ? asset($pageGlobalData->setting->favicon) : asset('frontAssets/images/loader.png') }}" 
+            alt="Preloader"
+        >
+    </div><!-- /.preloader -->
+
+    <div class="page-wrapper">
+
+        <header class="main-header">
+            <div class="topbar">
+                <div class="container">
+                    <div class="topbar__left">
+                        <div class="topbar__social">
+                            <a href="#" class="fab fa-facebook-square"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-pinterest-p"></a>
+                            <a href="#" class="fab fa-instagram"></a>
+                        </div><!-- /.topbar__social -->
+                        <p>Welcome to {{ $pageGlobalData->setting->site_name ?? 'AgriC' }}</p>
+                    </div><!-- /.topbar__left -->
+                    <div class="topbar__right">
+                        <a href="#"><i class="agrikon-icon-email"></i>needhelp@company.com</a>
+                        <a href="#"><i class="agrikon-icon-clock"></i>Mon - Sat 8:00 - 6:30, Sunday - CLOSED</a>
+                    </div><!-- /.topbar__right -->
+                </div><!-- /.container -->
+            </div><!-- /.topbar -->
+            <nav class="main-menu">
+                <div class="container">
+                    <div class="logo-box">
+                        <a href="{{ url('/') }}" aria-label="logo image">
+                            <img 
+                                src="{{ !empty($pageGlobalData->setting) && $pageGlobalData->setting->logo ? asset($pageGlobalData->setting->logo) : asset('frontAssets/images/logo-dark.png') }}" 
+                                width="153" 
+                                alt="Logo"
+                            >
+                        </a>
+                        <span class="fa fa-bars mobile-nav__toggler"></span>
+                    </div><!-- /.logo-box -->
+                    <ul class="main-menu__list">
+                        <li class="dropdown">
+                            <a href="{{ url('/') }}">Home</a>
+                        </li>
+                        <li>
+                            <a href="about.html">About</a>
+                        </li>
+                        <li class="dropdown"><a href="#">Pages</a>
+                            <ul>
+                                <li><a href="services.html">Services</a></li>
+                                <li><a href="service-details.html">Service Details</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="projects.html">Projects</a>
+                            <ul>
+                                <li><a href="projects.html">Projects</a></li>
+                                <li><a href="project-details.html">Projects Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="blog.html">News</a>
+                            <ul>
+                                <li><a href="blog.html">News</a></li>
+                                <li><a href="blog-details.html">News Details</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- /.main-menu__list -->
+
+                    <div class="main-header__info">
+                        <a href="tel:92-666-888-0000" class="main-header__info-phone">
+                            <i class="agrikon-icon-phone-call"></i>
+                            <span class="main-header__info-phone-content">
+                                <span class="main-header__info-phone-text">Call Anytime</span>
+                                <span class="main-header__info-phone-title">92 666 888 0000</span>
+                            </span><!-- /.main-header__info-phone-content -->
+                        </a><!-- /.main-header__info-phone -->
+                    </div><!-- /.main-header__info -->
+                </div><!-- /.container -->
+            </nav>
+            <!-- /.main-menu -->
+        </header><!-- /.main-header -->
+
+        <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
+
+        <section class="main-slider">
+            <div class="swiper-container thm-swiper__slider" data-swiper-options='{
+        "slidesPerView": 1,
+        "loop": true,
+        "effect": "fade",
+        "autoplay": {
+            "delay": 5000
+        },
+        "navigation": {
+            "nextEl": "#main-slider__swiper-button-next",
+            "prevEl": "#main-slider__swiper-button-prev"
+        }
+    }'>
+                {{-- <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="image-layer" style="background-image: url(frontAssets/images/main-slider/main-slider-1-1.jpg);">
+                        </div>
+                        <!-- /.image-layer -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-7 col-lg-7">
+                                    <span class="tagline">Welcome to Agriculture Farm</span>
+                                    <h2><span>Agriculture</span> <br>
+                                        & Eco Farming</h2>
+                                    <p>There are many of passages of lorem Ipsum, but the majori have <br> suffered alteration
+                                        in some form.</p>
+                                    <a href="#" class=" thm-btn">Discover More</a>
+                                    <!-- /.thm-btn dynamic-radius -->
+                                </div><!-- /.col-lg-7 text-right -->
+                            </div><!-- /.row -->
+                        </div><!-- /.container -->
+                    </div><!-- /.swiper-slide -->
+                    <div class="swiper-slide">
+                        <div class="image-layer" style="background-image: url(frontAssets/images/main-slider/main-slider-1-2.jpg);">
+                        </div>
+                        <!-- /.image-layer -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-7 col-lg-7">
+                                    <span class="tagline">Welcome to Agriculture Farm</span>
+                                    <h2><span>Agriculture</span><br>
+                                        & Eco Farming</h2>
+                                    <p>There are many of passages of lorem Ipsum, but the majori have <br> suffered alteration
+                                        in some form.</p>
+                                    <a href="#" class=" thm-btn">Discover More</a>
+                                    <!-- /.thm-btn dynamic-radius -->
+                                </div><!-- /.col-lg-7 text-right -->
+                            </div><!-- /.row -->
+                        </div><!-- /.container -->
+                    </div><!-- /.swiper-slide -->
+                </div><!-- /.swiper-wrapper --> --}}
+
+                <div class="swiper-wrapper">
+                    @foreach ($swipers as $swiper)
+                        @php
+                            $words = explode(' ', $swiper->title);
+                            $first = $words[0] ?? '';
+                            $rest = implode(' ', array_slice($words, 1));
+                        @endphp
+                        <div class="swiper-slide">
+                            {{-- <div class="image-layer" style="background-image: url('{{ $swiper->image }}');"></div> --}}
+                            <div class="image-layer" style="
+                                background-image: url('{{ $swiper->image }}');
+                                height: 1000px;
+                                background-size: cover;
+                                background-position: center;
+                                background-repeat: no-repeat;
+                            "></div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-7 col-lg-7">
+                                        <span class="tagline">Welcome to {{ $pageGlobalData->setting->site_name ?? 'AgriC' }}</span>
+                                        <h2>
+                                            <span>{{ $first }}</span><br>{{ $rest }}
+                                        </h2>
+                                        <p>{{ $swiper->subtitle }}</p>
+                                        <a href="#" class="thm-btn">Discover More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- If we need navigation buttons -->
+                <div class="main-slider__nav">
+                    <div class="swiper-button-prev" id="main-slider__swiper-button-next"><i class="agrikon-icon-left-arrow"></i>
+                    </div>
+                    <div class="swiper-button-next" id="main-slider__swiper-button-prev"><i class="agrikon-icon-right-arrow"></i></div>
+                </div><!-- /.main-slider__nav -->
+
+            </div><!-- /.swiper-container thm-swiper__slider -->
+        </section><!-- /.main-slider -->
+
+        <section class="service-one">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-4 wow fadeInUp" data-wow-duration="1500ms">
+                        <div class="service-one__box">
+                            <img src="frontAssets/images/services/service-1-1.jpg" alt="">
+                            <div class="service-one__box-content">
+                                <h3><a href="service-details.html">Agriculture Leader</a></h3>
+                            </div><!-- /.service-one__box-content -->
+                        </div><!-- /.service-one__box -->
+                    </div><!-- /.col-md-12 col-lg-4 -->
+                    <div class="col-md-12 col-lg-4 wow fadeInUp" data-wow-duration="1500ms">
+                        <div class="service-one__box">
+                            <img src="frontAssets/images/services/service-1-2.jpg" alt="">
+                            <div class="service-one__box-content">
+                                <h3><a href="service-details.html">Quality Standards</a></h3>
+                            </div><!-- /.service-one__box-content -->
+                        </div><!-- /.service-one__box -->
+                    </div><!-- /.col-md-12 col-lg-4 -->
+                    <div class="col-md-12 col-lg-4 wow fadeInUp" data-wow-duration="1500ms">
+                        <div class="service-one__box">
+                            <img src="frontAssets/images/services/service-1-3.jpg" alt="">
+                            <div class="service-one__box-content">
+                                <h3><a href="service-details.html">Organic Services</a></h3>
+                            </div><!-- /.service-one__box-content -->
+                        </div><!-- /.service-one__box -->
+                    </div><!-- /.col-md-12 col-lg-4 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.service-one -->
+
+        <section class="about-one">
+            <img src="frontAssets/images/icons/about-bg-icon-1-1.png" class="about-one__bg-shape-1" alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="about-one__images">
+                            <img src="frontAssets/images/resources/about-1-1.jpg" alt="">
+                            <img src="frontAssets/images/resources/about-1-2.jpg" alt="">
+                            <div class="about-one__count wow fadeInLeft" data-wow-duration="1500ms">
+                                <span>Trusted by</span>
+                                <h4>8900</h4>
+                            </div><!-- /.about-one__count -->
+                        </div><!-- /.about-one__images -->
+                    </div><!-- /.col-lg-6 -->
+                    <div class="col-lg-7">
+                        <div class="about-one__content">
+                            <div class="block-title text-left">
+                                <div class="block-title__image"></div><!-- /.block-title__image -->
+                                <p>Welcome to agricon</p>
+                                <h3>Better Agriculture for
+                                    Better Future</h3>
+                            </div><!-- /.block-title -->
+                            <div class="about-one__tagline">
+                                <p>We have 30 years of agriculture & eco farming experience globaly</p>
+                            </div><!-- /.about-one__tagline -->
+                            <div class="about-one__summery">
+                                <p>There are many variations of passages of lorem ipsum available but the majority have suffered
+                                    alteration in some form by injected humor or random word which don't look even.</p>
+                            </div><!-- /.about-one__summery -->
+                            <div class="about-one__icon-row">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="about-one__box">
+                                            <i class="agrikon-icon-farmer"></i>
+                                            <h4><a href="about.html">Professional
+                                                    Farmers</a></h4>
+                                        </div><!-- /.about-one__box -->
+                                    </div><!-- /.col-lg-6 -->
+                                    <div class="col-lg-6">
+                                        <div class="about-one__box">
+                                            <i class="agrikon-icon-agriculture"></i>
+                                            <h4><a href="services.html">Organic & Eco
+                                                    Solutions</a></h4>
+                                        </div><!-- /.about-one__box -->
+                                    </div><!-- /.col-lg-6 -->
+                                </div><!-- /.row -->
+                            </div><!-- /.about-one__icon-row -->
+                            <a href="about.html" class="thm-btn">Discover More</a><!-- /.thm-btn -->
+                        </div><!-- /.about-one__content -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.about-one -->
+
+        <section class="service-two">
+            <div class="service-two__bottom-curv"></div><!-- /.service-two__bottom-curv -->
+            <div class="container">
+                <div class="block-title text-center">
+                    <div class="block-title__image"></div><!-- /.block-title__image -->
+                    <p>Our Services list</p>
+                    <h3>What We’re Offering</h3>
+                </div><!-- /.block-title -->
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="service-two__card">
+                            <div class="service-two__card-image">
+                                <img src="frontAssets/images/services/service-2-1.jpg" alt="">
+                            </div><!-- /.service-two__card-image -->
+                            <div class="service-two__card-content">
+                                <div class="service-two__card-icon">
+                                    <i class="agrikon-icon-tractor"></i>
+                                </div><!-- /.service-two__card-icon -->
+                                <h3><a href="service-details.html">Agriculture Products</a></h3>
+                                <p>Lorem ium dolor sit ametad pisicing elit sed simply do ut.</p>
+                            </div><!-- /.service-two__card-content -->
+                        </div><!-- /.service-two__card -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-3 -->
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="service-two__card">
+                            <div class="service-two__card-image">
+                                <img src="frontAssets/images/services/service-2-2.jpg" alt="">
+                            </div><!-- /.service-two__card-image -->
+                            <div class="service-two__card-content">
+                                <div class="service-two__card-icon">
+                                    <i class="agrikon-icon-organic-food"></i>
+                                </div><!-- /.service-two__card-icon -->
+                                <h3><a href="service-details.html">Oragnic
+                                        Products</a></h3>
+                                <p>Lorem ium dolor sit ametad pisicing elit sed simply do ut.</p>
+                            </div><!-- /.service-two__card-content -->
+                        </div><!-- /.service-two__card -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-3 -->
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="service-two__card">
+                            <div class="service-two__card-image">
+                                <img src="frontAssets/images/services/service-2-3.jpg" alt="">
+                            </div><!-- /.service-two__card-image -->
+                            <div class="service-two__card-content">
+                                <div class="service-two__card-icon">
+                                    <i class="agrikon-icon-vegetable"></i>
+                                </div><!-- /.service-two__card-icon -->
+                                <h3><a href="service-details.html">Fresh
+                                        Vegetables</a></h3>
+                                <p>Lorem ium dolor sit ametad pisicing elit sed simply do ut.</p>
+                            </div><!-- /.service-two__card-content -->
+                        </div><!-- /.service-two__card -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-3 -->
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="service-two__card">
+                            <div class="service-two__card-image">
+                                <img src="frontAssets/images/services/service-2-4.jpg" alt="">
+                            </div><!-- /.service-two__card-image -->
+                            <div class="service-two__card-content">
+                                <div class="service-two__card-icon">
+                                    <i class="agrikon-icon-dairy"></i>
+                                </div><!-- /.service-two__card-icon -->
+                                <h3><a href="service-details.html">Dairy
+                                        Products</a></h3>
+                                <p>Lorem ium dolor sit ametad pisicing elit sed simply do ut.</p>
+                            </div><!-- /.service-two__card-content -->
+                        </div><!-- /.service-two__card -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-3 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.service-two -->
+
+        <div class="projects-one project-one__home-one">
+            <div class="container">
+                <div class="block-title text-center">
+                    <div class="block-title__image"></div><!-- /.block-title__image -->
+                    <p>Closed projects</p>
+                    <h3>Latest Projects List</h3>
+                </div><!-- /.block-title -->
+                <div class="thm-swiper__slider swiper-container" data-swiper-options='{"spaceBetween": 0, "slidesPerView": 1, "loop": true, "slidesPerGroup": 1, "pagination": {
+            "el": "#projects-one__swiper-pagination",
+            "type": "bullets",
+            "clickable": true
+        },
+        "breakpoints": {
+            "0": {
+                "spaceBetween": 0,
+                "slidesPerView": 1,
+                "slidesPerGroup": 1
+            },
+            "640": {
+                "spaceBetween": 30,
+                "slidesPerView": 2,
+                "slidesPerGroup": 2
+            },
+            "992": {
+                "spaceBetween": 30,
+                "slidesPerView": 2,
+                "slidesPerGroup": 2
             }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+        }}'>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="projects-one__single">
+                                <img src="frontAssets/images/projects/project-2-1.jpg" alt="">
+                                <div class="projects-one__content">
+                                    <h3>Harvest Innovation</h3>
+                                    <a href="project-details.html" class="projects-one__button"><i class="agrikon-icon-right-arrow"></i></a><!-- /.projects-one__button -->
+                                </div><!-- /.projects-one__content -->
+                            </div><!-- /.projects-one__single -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="projects-one__single">
+                                <img src="frontAssets/images/projects/project-2-2.jpg" alt="">
+                                <div class="projects-one__content">
+                                    <h3>Harvest Innovation</h3>
+                                    <a href="project-details.html" class="projects-one__button"><i class="agrikon-icon-right-arrow"></i></a><!-- /.projects-one__button -->
+                                </div><!-- /.projects-one__content -->
+                            </div><!-- /.projects-one__single -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="projects-one__single">
+                                <img src="frontAssets/images/projects/project-2-3.jpg" alt="">
+                                <div class="projects-one__content">
+                                    <h3>Harvest Innovation</h3>
+                                    <a href="project-details.html" class="projects-one__button"><i class="agrikon-icon-right-arrow"></i></a><!-- /.projects-one__button -->
+                                </div><!-- /.projects-one__content -->
+                            </div><!-- /.projects-one__single -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="projects-one__single">
+                                <img src="frontAssets/images/projects/project-2-4.jpg" alt="">
+                                <div class="projects-one__content">
+                                    <h3>Harvest Innovation</h3>
+                                    <a href="project-details.html" class="projects-one__button"><i class="agrikon-icon-right-arrow"></i></a><!-- /.projects-one__button -->
+                                </div><!-- /.projects-one__content -->
+                            </div><!-- /.projects-one__single -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="projects-one__single">
+                                <img src="frontAssets/images/projects/project-2-2.jpg" alt="">
+                                <div class="projects-one__content">
+                                    <h3>Harvest Innovation</h3>
+                                    <a href="project-details.html" class="projects-one__button"><i class="agrikon-icon-right-arrow"></i></a><!-- /.projects-one__button -->
+                                </div><!-- /.projects-one__content -->
+                            </div><!-- /.projects-one__single -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="projects-one__single">
+                                <img src="frontAssets/images/projects/project-2-4.jpg" alt="">
+                                <div class="projects-one__content">
+                                    <h3>Harvest Innovation</h3>
+                                    <a href="project-details.html" class="projects-one__button"><i class="agrikon-icon-right-arrow"></i></a><!-- /.projects-one__button -->
+                                </div><!-- /.projects-one__content -->
+                            </div><!-- /.projects-one__single -->
+                        </div><!-- /.swiper-slide -->
+                    </div><!-- /.swiper-wrapper -->
+                    <div class="swiper-pagination" id="projects-one__swiper-pagination"></div>
+                </div><!-- /.swiper-container -->
+            </div><!-- /.container -->
+        </div><!-- /.projects-one -->
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+        <section class="call-to-action__three jarallax" data-jarallax data-speed="0.3" data-imgPosition="50% 50%">
+            <img class="call-to-action__three__bg jarallax-img" src="frontAssets/images/backgrounds/cta-1-bg-1.jpg" alt="parallax-image" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 wow fadeInLeft" data-wow-duration="1500ms">
+                        <div class="call-to-action__three-image">
+                            <img src="frontAssets/images/resources/cta-3-1.jpg" alt="">
+                            <img src="frontAssets/images/resources/cta-3-2.jpg" alt="">
+                        </div><!-- /.call-to-action__three-image -->
+                    </div><!-- /.col-lg-5 -->
+                    <div class="col-lg-7">
+                        <div class="call-to-action__three-content">
+                            <h3>Providing High Quality
+                                Products</h3>
+                            <a href="about.html" class="thm-btn">Discover More</a><!-- /.thm-btn -->
+                        </div><!-- /.call-to-action__three-content -->
+                    </div><!-- /.col-lg-7 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.call-to-action__three -->
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                        <g clip-path="url(#clip0)" fill="#EF3B2D">
-                            <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"/>
-                        </g>
-                    </svg>
-                </div>
+        <section class="testimonials-one">
+            <img src="frontAssets/images/icons/testimonials-bg-1-1.png" class="testimonials-one__bg" alt="">
+            <div class="container">
+                <h2 class="testimonials-one__title">Testimonials</h2>
+                <div id="testimonials-one__carousel" class="testimonials-one__carousel swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__icons">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div><!-- /.testimonials-one__icons -->
+                            <p>This is due to their excellent service, competitive pricing and customer support. It’s throughly
+                                refresing to get such a personal touch. Duis aute lorem ipsum is simply free text irure dolor in
+                                reprehenderit in esse nulla pariatur.</p>
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__icons">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div><!-- /.testimonials-one__icons -->
+                            <p>This is due to their excellent service, competitive pricing and customer support. It’s throughly
+                                refresing to get such a personal touch. Duis aute lorem ipsum is simply free text irure dolor in
+                                reprehenderit in esse nulla pariatur.</p>
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__icons">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div><!-- /.testimonials-one__icons -->
+                            <p>This is due to their excellent service, competitive pricing and customer support. It’s throughly
+                                refresing to get such a personal touch. Duis aute lorem ipsum is simply free text irure dolor in
+                                reprehenderit in esse nulla pariatur.</p>
+                        </div><!-- /.swiper-slide -->
+                    </div><!-- /.swiper-wrapper -->
+                </div><!-- /#testimonials-one__carousel -->
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                            </div>
+                <div id="testimonials-one__thumb" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__image">
+                                <img src="frontAssets/images/resources/testimonials-1-1.jpg" alt="">
+                            </div><!-- /.testimonials-one__image -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__image">
+                                <img src="frontAssets/images/resources/testimonials-1-2.jpg" alt="">
+                            </div><!-- /.testimonials-one__image -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__image">
+                                <img src="frontAssets/images/resources/testimonials-1-3.jpg" alt="">
+                            </div><!-- /.testimonials-one__image -->
+                        </div><!-- /.swiper-slide -->
+                    </div><!-- /.swiper-wrapper -->
+                </div><!-- /#testimonials-one__thumb.swiper-container -->
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                                </div>
-                            </div>
-                        </div>
+                <div id="testimonials-one__meta" class="testimonials-one__carousel swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__meta">
+                                <h4>Jessica Brown</h4>
+                                <span>Customer</span>
+                            </div><!-- /.testimonials-one__meta -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__meta">
+                                <h4>Caleb Hoffman</h4>
+                                <span>Customer</span>
+                            </div><!-- /.testimonials-one__meta -->
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <div class="testimonials-one__meta">
+                                <h4>Bradley Kim</h4>
+                                <span>Customer</span>
+                            </div><!-- /.testimonials-one__meta -->
+                        </div><!-- /.swiper-slide -->
+                    </div><!-- /.swiper-wrapper -->
+                </div><!-- /#testimonials-one__meta.swiper-container -->
+                <div class="swiper-pagination" id="testimonials-one__swiper-pagination"></div>
+            </div><!-- /.container -->
+        </section><!-- /.testimonials-one -->
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                            </div>
+        <section class="gray-boxed-wrapper home-one__boxed">
+            <img src="frontAssets/images/icons/home-1-blog-bg.png" alt="" class="home-one__boxed-bg">
+            <div class="blog-home-two blog-home-one">
+                <div class="container">
+                    <div class="row top-row">
+                        <div class="col-lg-6">
+                            <div class="block-title">
+                                <div class="block-title__image"></div><!-- /.block-title__image -->
+                                <p>From the blog post</p>
+                                <h3>Latest News & Articles
+                                    Directly from Blog</h3>
+                            </div><!-- /.block-title -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                            <p class="block-text">Lorem ipsum is simply free text available. Aenean eu leo quam. Pellentesque
+                                ornare
+                                sem lacinia
+                                quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                        </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="blog-card">
+                                <div class="blog-card__image">
+                                    <img src="frontAssets/images/blog/blog-grid-1.jpg" alt="Best Way to Do Eco and Agriculture">
+                                    <a href="blog-details.html"></a>
+                                </div><!-- /.blog-card__image -->
+                                <div class="blog-card__content">
+                                    <div class="blog-card__date">18 Nov</div><!-- /.blog-card__date -->
+                                    <div class="blog-card__meta">
+                                        <a href="blog-details.html"><i class="far fa-user-circle"></i> by Admin</a>
+                                        <a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
+                                    </div><!-- /.blog-card__meta -->
+                                    <h3><a href="blog-details.html">Best Way to Do Eco and Agriculture</a></h3>
+                                    <a href="blog-details.html" class="thm-btn">Read More</a><!-- /.thm-btn -->
+                                </div><!-- /.blog-card__content -->
+                            </div><!-- /.blog-card -->
+                        </div><!-- /.col-md-12 col-lg-4 -->
+                        <div class="col-md-12 col-lg-4">
+                            <div class="blog-card">
+                                <div class="blog-card__image">
+                                    <img src="frontAssets/images/blog/blog-grid-2.jpg" alt="Leverage agile frameworks to provide">
+                                    <a href="blog-details.html"></a>
+                                </div><!-- /.blog-card__image -->
+                                <div class="blog-card__content">
+                                    <div class="blog-card__date">18 Nov</div><!-- /.blog-card__date -->
+                                    <div class="blog-card__meta">
+                                        <a href="blog-details.html"><i class="far fa-user-circle"></i> by Admin</a>
+                                        <a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
+                                    </div><!-- /.blog-card__meta -->
+                                    <h3><a href="blog-details.html">Leverage agile frameworks to provide</a></h3>
+                                    <a href="blog-details.html" class="thm-btn">Read More</a><!-- /.thm-btn -->
+                                </div><!-- /.blog-card__content -->
+                            </div><!-- /.blog-card -->
+                        </div><!-- /.col-md-12 col-lg-4 -->
+                        <div class="col-md-12 col-lg-4">
+                            <div class="blog-card">
+                                <div class="blog-card__image">
+                                    <img src="frontAssets/images/blog/blog-grid-3.jpg" alt="Organically grow the holistic world view">
+                                    <a href="blog-details.html"></a>
+                                </div><!-- /.blog-card__image -->
+                                <div class="blog-card__content">
+                                    <div class="blog-card__date">18 Nov</div><!-- /.blog-card__date -->
+                                    <div class="blog-card__meta">
+                                        <a href="blog-details.html"><i class="far fa-user-circle"></i> by Admin</a>
+                                        <a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
+                                    </div><!-- /.blog-card__meta -->
+                                    <h3><a href="blog-details.html">Organically grow the holistic world view</a></h3>
+                                    <a href="blog-details.html" class="thm-btn">Read More</a><!-- /.thm-btn -->
+                                </div><!-- /.blog-card__content -->
+                            </div><!-- /.blog-card -->
+                        </div><!-- /.col-md-12 col-lg-4 -->
+                    </div><!-- /.row -->
+                    <hr />
+                </div><!-- /.container -->
+            </div><!-- /.blog-home-two -->
+            <div class="blog-home__slogan">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="blog-home__slogan-main">
+                                <i class="agrikon-icon-farm"></i>
+                                <div class="blog-home__slogan-content">
+                                    <h3>We Care About Our Agriculture Growth</h3>
+                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                                        suffered in some form, by injected humour words.</p>
+                                </div><!-- /.blog-home__slogan-content -->
+                            </div><!-- /.blog-home__slogan-main -->
+                        </div><!-- /.col-lg-9 -->
+                        <div class="col-lg-3">
+                            <div class="blog-home__slogan-image">
+                                <img src="frontAssets/images/resources/blog-cta-1.png" alt="">
+                            </div><!-- /.blog-home__slogan-image -->
+                        </div><!-- /.col-lg-3 -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </div><!-- /.blog-home__slogan -->
+        </section><!-- /.gray-boxed-wrapper -->
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                </div>
-                            </div>
-                        </div>
+        <section class="contact-two">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
+                        <div class="contact-two__image">
+                            <div class="contact-two__image-bubble-1"></div><!-- /.contact-two__image-bubble-1 -->
+                            <div class="contact-two__image-bubble-2"></div><!-- /.contact-two__image-bubble-2 -->
+                            <div class="contact-two__image-bubble-3"></div><!-- /.contact-two__image-bubble-3 -->
+                            <img src="frontAssets/images/resources/contact-1-1.jpg" class="img-fluid" alt="">
+                        </div><!-- /.contact-two__image -->
+                    </div><!-- /.col-sm-12 col-md-12 col-lg-12 col-xl-5 -->
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="contact-two__content">
+                            <div class="block-title">
+                                <div class="block-title__image"></div><!-- /.block-title__image -->
+                                <p>Contact now</p>
+                                <h3>Leave Us A
+                                    Message</h3>
+                            </div><!-- /.block-title -->
+                            <div class="contact-two__summery">
+                                <p>Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do eiusmod tempor
+                                    incididunt
+                                    ut labore et dolore magna aliqua lonm andhn. Aenean tincidunt id mauris id auctor. Donec at
+                                    ligula lacus dignissim mi quis simply neque.</p>
+                            </div><!-- /.contact-two__summery -->
+                        </div><!-- /.contact-two__content -->
+                    </div><!-- /.col-sm-12 col-md-12 col-lg-12 col-xl-4 -->
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                        <form action="https://ninetheme.com/themes/html-templates/agrikon/assets/inc/sendemail.php" class="contact-one__form contact-form-validated">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input type="text" name="name" placeholder="Full Name">
+                                </div><!-- /.col-lg-6 -->
+                                <div class="col-lg-12">
+                                    <input type="text" name="email" placeholder="Email Address">
+                                </div><!-- /.col-lg-6 -->
+                                <div class="col-lg-12">
+                                    <input type="text" name="phone" placeholder="Phone Number">
+                                </div><!-- /.col-lg-6 -->
+                                <div class="col-lg-12">
+                                    <textarea name="message" placeholder="Write Message"></textarea>
+                                </div><!-- /.col-lg-12 -->
+                                <div class="col-lg-12">
+                                    <button type="submit" class="thm-btn">Send Message</button><!-- /.thm-btn -->
+                                </div><!-- /.col-lg-12 -->
+                            </div><!-- /.row -->
+                        </form>
+                    </div><!-- /.col-sm-12 col-md-12 col-lg-12 col-xl-4 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.contact-two -->
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                            </div>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-
-                            <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                                Shop
+        <div class="client-carousel client-carousel__has-border-top">
+            <div class="container">
+                <div class="thm-swiper__slider swiper-container" data-swiper-options='{"spaceBetween": 140, "slidesPerView": 5, "autoplay": { "delay": 5000 }, "breakpoints": {
+                "0": {
+                    "spaceBetween": 30,
+                    "slidesPerView": 2
+                },
+                "375": {
+                    "spaceBetween": 30,
+                    "slidesPerView": 2
+                },
+                "575": {
+                    "spaceBetween": 30,
+                    "slidesPerView": 3
+                },
+                "767": {
+                    "spaceBetween": 50,
+                    "slidesPerView": 4
+                },
+                "991": {
+                    "spaceBetween": 50,
+                    "slidesPerView": 5
+                },
+                "1199": {
+                    "spaceBetween": 100,
+                    "slidesPerView": 5
+                }
+            }}'>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                        <div class="swiper-slide">
+                            <img src="frontAssets/images/resources/brand-1-1.png" alt="">
+                        </div><!-- /.swiper-slide -->
+                    </div><!-- /.swiper-wrapper -->
+                </div><!-- /.thm-swiper__slider -->
+            </div><!-- /.container -->
+        </div><!-- /.client-carousel -->
+        <footer class="site-footer">
+            <img src="frontAssets/images/icons/footer-bg-icon-1.png" class="site-footer__shape-1" alt="">
+            <img src="frontAssets/images/icons/footer-bg-icon-2.png" class="site-footer__shape-2" alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                        <div class="footer-widget">
+                            <a href="index.html" class="footer-widget__Logo">
+                                <img src="frontAssets/images/logo-light.png" width="153" alt="">
                             </a>
+                            <p>There are many variations of passages of lorem ipsum available, but the majority suffered.
+                            </p>
+                            <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
+                                <input type="email" name="EMAIL" placeholder="Email Address">
+                                <button type="submit"><i class="agrikon-icon-right-arrow"></i></button>
+                            </form><!-- /.mc-form -->
+                            <div class="mc-form__response"></div><!-- /.mc-form__response -->
+                            <div class="footer__social">
+                                <a href="#" class="fab fa-facebook-square"></a>
+                                <a href="#" class="fab fa-twitter"></a>
+                                <a href="#" class="fab fa-pinterest-p"></a>
+                                <a href="#" class="fab fa-instagram"></a>
+                            </div><!-- /.topbar__social -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-4 -->
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
+                        <div class="footer-widget footer-widget__links-widget">
+                            <h3 class="footer-widget__title">Links</h3><!-- /.footer-widget__title -->
+                            <ul class="list-unstyled footer-widget__links">
+                                <li><a href="#">Our Projects</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">New Campaign</a></li>
+                                <li><a href="#">Upcoming Events</a></li>
+                                <li><a href="#">Volunteers</a></li>
+                            </ul><!-- /.list-unstyled -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-2 -->
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-widget">
+                            <h3 class="footer-widget__title">News</h3><!-- /.footer-widget__title -->
+                            <ul class="list-unstyled footer-widget__post">
+                                <li>
+                                    <img src="frontAssets/images/resources/footer-post-1.png" alt="">
+                                    <div class="footer-widget__post-content">
+                                        <span>Nov 16, 2020</span>
+                                        <h4><a href="blog-details.html">How to grow vagetables in the forms</a></h4>
+                                    </div><!-- /.footer-widget__post-content -->
+                                </li>
+                                <li>
+                                    <img src="frontAssets/images/resources/footer-post-2.png" alt="">
+                                    <div class="footer-widget__post-content">
+                                        <span>Nov 16, 2020</span>
+                                        <h4><a href="blog-details.html">How to grow vagetables in the forms</a></h4>
+                                    </div><!-- /.footer-widget__post-content -->
+                                </li>
+                            </ul><!-- /.list-unstyled footer-widget__post -->
+                        </div><!-- /.footer-widget -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-3 -->
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        <h3 class="footer-widget__title">Contact</h3><!-- /.footer-widget__title -->
+                        <ul class="list-unstyled footer-widget__contact">
+                            <li>
+                                <i class="agrikon-icon-telephone"></i>
+                                <a href="tel:666-888-0000">666 888 0000</a>
+                            </li>
+                            <li>
+                                <i class="agrikon-icon-email"></i>
+                                <a href="mailto:needhelp@company.com">needhelp@company.com</a>
+                            </li>
+                            <li>
+                                <i class="agrikon-icon-pin"></i>
+                                <a href="#">80 broklyn golden street line
+                                    New York, USA</a>
+                            </li>
+                        </ul><!-- /.list-unstyled -->
+                    </div><!-- /.col-sm-12 col-md-6 col-lg-3 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </footer><!-- /.site-footer -->
+        <div class="bottom-footer">
+            <div class="container">
+                <p>© Copyright 2020 by Company.com</p>
+                <div class="bottom-footer__links">
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Sitemap</a>
+                </div><!-- /.bottom-footer__links -->
+            </div><!-- /.container -->
+        </div><!-- /.bottom-footer -->
 
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
+    </div><!-- /.page-wrapper -->
 
-                            <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Sponsor
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </div>
-                </div>
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <!-- /.mobile-nav__overlay -->
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="far fa-times"></i></span>
+
+            <div class="logo-box">
+                <a href="index.html" aria-label="logo image"><img src="frontAssets/images/logo-light.png" width="155" alt="" /></a>
             </div>
+            <!-- /.logo-box -->
+            <div class="mobile-nav__container"></div>
+            <!-- /.mobile-nav__container -->
+
+            <ul class="mobile-nav__contact list-unstyled">
+                <li>
+                    <i class="agrikon-icon-email"></i>
+                    <a href="mailto:needhelp@agrikon.com">needhelp@agrikon.com</a>
+                </li>
+                <li>
+                    <i class="agrikon-icon-telephone"></i>
+                    <a href="tel:666-888-0000">666 888 0000</a>
+                </li>
+            </ul><!-- /.mobile-nav__contact -->
+            <div class="mobile-nav__top">
+                <div class="mobile-nav__language">
+                    <img src="frontAssets/images/resources/flag-1-1.jpg" alt="">
+                    <label class="sr-only" for="language-select">select language</label>
+                    <!-- /#language-select.sr-only -->
+                    <select class="selectpicker" id="language-select">
+                        <option value="english">English</option>
+                        <option value="arabic">Arabic</option>
+                    </select>
+                </div><!-- /.mobile-nav__language -->
+                <div class="mobile-nav__social">
+                    <a href="#" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="facebook"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#" aria-label="pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" aria-label="instagram"><i class="fab fa-instagram"></i></a>
+                </div><!-- /.mobile-nav__social -->
+            </div><!-- /.mobile-nav__top -->
+
+
+
         </div>
-    </body>
+        <!-- /.mobile-nav__content -->
+    </div>
+    <!-- /.mobile-nav__wrapper -->
+
+    <div class="search-popup">
+        <div class="search-popup__overlay search-toggler"></div>
+        <!-- /.search-popup__overlay -->
+        <div class="search-popup__content">
+            <form action="#">
+                <label for="search" class="sr-only">search here</label><!-- /.sr-only -->
+                <input type="text" id="search" placeholder="Search Here..." />
+                <button type="submit" aria-label="search submit" class="thm-btn">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+        <!-- /.search-popup__content -->
+    </div>
+    <!-- /.search-popup -->
+
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
+
+
+    <script src="{{ asset('frontAssets/js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/swiper.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/wow.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/odometer.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/jquery.appear.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/jarallax.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/circle-progress.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/wNumb.min.js') }}"></script>
+    <script src="{{ asset('frontAssets/js/nouislider.min.js') }}"></script>
+
+    <!-- template js -->
+    <script src="{{ asset('frontAssets/js/theme.js') }}"></script>
+</body>
+
 </html>

@@ -103,7 +103,7 @@
                                 
                                 <td>
                                     <div class="text-end">
-                                        <span class="font-size-11">{{ !empty($setting) ? $setting->description : "Solution for everyone" }}</span>
+                                        <span class="font-size-11">{!! !empty($setting) ? $setting->description : "Solution for everyone" !!}</span>
                                     </div>
                                 </td>
                             </tr>
@@ -113,8 +113,16 @@
                                     <h5 class="text-truncate font-size-14 m-0"><a href="javascript: void(0);" class="text-dark">Site Logo</a></h5>
                                 </td>
                                 <td>
+                                    <style>
+                                        .avatar-xl-plus {
+                                            width: 300px;
+                                            height: auto;
+                                        }
+
+                                    </style>
                                     <div class="text-end">
-                                        <img src="{{ !empty($setting) ? $setting->logo : null }}" alt="" class="avatar-xl">
+                                        <img src="{{ $pageGlobalData->setting->logo ?? '' }}" alt="Site Logo" class="avatar-xl-plus" style="background: rgba(0,0,0,0.08); border-radius: 5px;">
+
                                     </div>
                                 </td>
                             </tr>
@@ -125,7 +133,8 @@
                                 </td>
                                 <td>
                                     <div class="text-end">
-                                        <img src="{{ !empty($setting) ? $setting->favicon : null }}" alt="" class="rounded-circle avatar-xs">
+                                        {{-- <img src="{{ !empty($setting) ? $setting->favicon : null }}" alt="" class="rounded-circle avatar-xs"> --}}
+                                        <img src="{{ !empty($pageGlobalData->setting) ? $pageGlobalData->setting->favicon : null }}" alt="Favicon" class="rounded-circle avatar-xl" style="background: rgba(0,0,0,0.08);">
                                     </div>
                                 </td>
                             </tr>

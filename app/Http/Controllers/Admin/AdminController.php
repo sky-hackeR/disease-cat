@@ -57,9 +57,108 @@ class AdminController extends Controller
     }
 
     public function swipers(){
-        $swipers = Swiper::get();
+        $swipers = Swiper::all();
         return view('admin.swipers', [
             'swipers' => $swipers
         ]);
     }
+
+
+    public function updateSiteInfo(Request $request){
+        $validator = Validator::make($request->all(), [
+            'site_name' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'logo' => 'nullable|image',
+            'favicon' => 'nullable|image',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Error', $validator->messages()->first())->persistent('Close');
+            return redirect()->back();
+        }
+
+        // Retrieve or create new SiteInfo
+        $siteInfo = Setting::find($request->site_info_id) ?? new Setting;
+
+        // Mass assign basic fillable attributes
+        $siteInfo->fill($request->only(['site_name', 'description']));
+
+        // Handle image uploads
+        if ($request->hasFile('logo')) {
+            $logoPath = cloudinary()->uploadFile($request->file('logo')->getRealPath())->getSecurePath();
+            $siteInfo->logo = $logoPath;
+        }
+
+        if ($request->hasFile('favicon')) {
+            $faviconPath = cloudinary()->uploadFile($request->file('favicon')->getRealPath())->getSecurePath();
+            $siteInfo->favicon = $faviconPath;
+        }
+
+        if ($siteInfo->save()) {
+            alert()->success('Success', 'Site information updated successfully')->persistent('Close');
+        } else {
+            alert()->error('Oops!', 'Something went wrong')->persistent('Close');
+        }
+
+        return redirect()->back();
+    }
+
+    public function addSwiper(Request $request){
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Validation Error', $validator->messages()->first())->persistent('Close');
+            return redirect()->back();
+        }
+
+        // Ensure all fields are present
+        if (!$request->hasFile('image') || !$request->title || !$request->subtitle) {
+            alert()->error('Error', 'All fields (title, subtitle, and image) are required.')->persistent('Close');
+            return redirect()->back();
+        }
+
+        $swiper = new Swiper();
+        $swiper->title = $request->title;
+        $swiper->subtitle = $request->subtitle;
+
+        // Upload image to Cloudinary
+        $imagePath = cloudinary()->uploadFile($request->file('image')->getRealPath())->getSecurePath();
+        $swiper->image = $imagePath;
+
+        if ($swiper->save()) {
+            alert()->success('Success', 'Swiper slide added successfully')->persistent('Close');
+        } else {
+            alert()->error('Oops!', 'Something went wrong while saving')->persistent('Close');
+        }
+
+        return redirect()->back();
+    }
+
+    public function deleteSwiper(Request $request){
+        $validator = Validator::make($request->all(), [
+            'swiper_id' => 'required|exists:swipers,id',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Error', $validator->messages()->first())->persistent('Close');
+            return redirect()->back();
+        }
+
+        $swiper = Swiper::find($request->swiper_id);
+
+        if ($swiper->delete()) {
+            alert()->success('Deleted', 'Swiper soft-deleted successfully')->persistent('Close');
+            return redirect()->back();
+        }
+
+        alert()->error('Oops!', 'Something went wrong')->persistent('Close');
+        return redirect()->back();
+    }
+
+    
+
 }
