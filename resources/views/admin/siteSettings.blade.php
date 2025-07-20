@@ -91,7 +91,7 @@
                                 
                                 <td>
                                     <div class="text-end">
-                                        <span class="font-size-11">{{ !empty($setting) ? $setting->site_name : "sky-hackeR." }}</span>
+                                        <span class="font-size-11">{{ !empty($setting) ? $setting->site_name : "AgriC" }}</span>
                                     </div>
                                 </td>
                             </tr>

@@ -15,6 +15,7 @@ use App\Models\SiteInfo as Setting;
 use App\Models\Social;
 use App\Models\Admin;
 use App\Models\Swiper;
+use App\Models\Banner;
 
 
 use SweetAlert;
@@ -62,6 +63,14 @@ class AdminController extends Controller
             'swipers' => $swipers
         ]);
     }
+
+    public function banners(){
+        $banner = Banner::latest()->first();
+        return view('admin.banners', [
+            'banner' => $banner
+        ]);
+    }
+
 
 
     public function updateSiteInfo(Request $request){
@@ -156,6 +165,65 @@ class AdminController extends Controller
         }
 
         alert()->error('Oops!', 'Something went wrong')->persistent('Close');
+        return redirect()->back();
+    }
+
+
+    public function addBanner(Request $request){
+        $validator = Validator::make($request->all(), [
+            'home_banner' => 'nullable|image|max:2048',
+            'about_banner' => 'nullable|image|max:2048',
+            'project_banner' => 'nullable|image|max:2048',
+            'service_banner' => 'nullable|image|max:2048',
+            'blog_banner' => 'nullable|image|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Validation Error', $validator->messages()->first())->persistent('Close');
+            return redirect()->back();
+        }
+
+        $banner = new Banner();
+
+        foreach (['home_banner', 'about_banner', 'project_banner', 'service_banner', 'blog_banner'] as $field) {
+            if ($request->hasFile($field)) {
+                $banner->$field = cloudinary()->uploadFile($request->file($field)->getRealPath())->getSecurePath();
+            }
+        }
+
+        $banner->save();
+        alert()->success('Success', 'Banners added successfully')->persistent('Close');
+        return redirect()->back();
+    }
+
+    public function editBanner(Request $request){
+        $banner = Banner::find($request->banner_id);
+
+        if (!$banner) {
+            alert()->error('Error', 'Banner not found')->persistent('Close');
+            return redirect()->back();
+        }
+
+        foreach (['home_banner', 'about_banner', 'project_banner', 'service_banner', 'blog_banner'] as $field) {
+            if ($request->hasFile($field)) {
+                $banner->$field = cloudinary()->uploadFile($request->file($field)->getRealPath())->getSecurePath();
+            }
+        }
+
+        $banner->save();
+        alert()->success('Updated', 'Banners updated successfully')->persistent('Close');
+        return redirect()->back();
+    }
+
+    public function deleteBanner(Request $request){
+        $banner = Banner::find($request->banner_id);
+
+        if ($banner && $banner->delete()) {
+            alert()->success('Deleted', 'Banner deleted')->persistent('Close');
+        } else {
+            alert()->error('Error', 'Unable to delete')->persistent('Close');
+        }
+
         return redirect()->back();
     }
 

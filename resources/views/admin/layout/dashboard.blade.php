@@ -8,7 +8,7 @@
 <head>
         
     <meta charset="utf-8" />
-    <title>{{ !empty($pageGlobalData->setting) ? $pageGlobalData->setting->site_name : "sky" }} - Admin  Dashboard</title>
+    <title>{{ !empty($pageGlobalData->setting) ? $pageGlobalData->setting->site_name : "AgriC" }} - Admin  Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="{{ !empty($pageGlobalData->setting) ? $pageGlobalData->setting->description : "Solution to All" }}" name="description" />
     <meta content="skyhackeR(+2348082574927)" name="author" />
@@ -144,6 +144,13 @@
                                 <a href="{{ url('/admin/swipers') }}" class="waves-effect">
                                     <i class="bx bx-cog"></i>
                                     <span key="t-settings">Swiper</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url('/admin/banners') }}" class="waves-effect">
+                                    <i class="bx bx-cog"></i>
+                                    <span key="t-settings">Banner</span>
                                 </a>
                             </li>
 

@@ -38,4 +38,9 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/addSwiper', [App\Http\Controllers\Admin\AdminController::class, 'addSwiper'])->name('addSwiper')->middleware(['auth:admin']);
   Route::post('/editSwiper', [App\Http\Controllers\Admin\AdminController::class, 'editSwiper'])->name('editSwiper')->middleware(['auth:admin']);
   Route::post('/deleteSwiper', [App\Http\Controllers\Admin\AdminController::class, 'deleteSwiper'])->name('deleteSwiper')->middleware(['auth:admin']);
+
+  Route::get('/banners', [App\Http\Controllers\Admin\AdminController::class, 'banners'])->name('banners')->middleware(['auth:admin']);
+  Route::post('/addBanner', [App\Http\Controllers\Admin\AdminController::class, 'addBanner'])->name('addBanner')->middleware(['auth:admin']);
+  Route::post('/editBanner', [App\Http\Controllers\Admin\AdminController::class, 'editBanner'])->name('editBanner')->middleware(['auth:admin']);
+  Route::post('/deleteBanner', [App\Http\Controllers\Admin\AdminController::class, 'deleteBanner'])->name('deleteBanner')->middleware(['auth:admin']);
 });

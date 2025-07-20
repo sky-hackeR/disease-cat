@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $pageGlobalData->setting->site_name ?? 'AgriC' }} | {{ $pageGlobalData->setting->description ?? 'Farming made easy' }}</title>
+    <title>{{ $pageGlobalData->setting->site_name ?? 'AgriC' }} | {{ strip_tags($pageGlobalData->setting->description ?? 'Farming made easy') }}</title>
     <!-- favicons Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset($pageGlobalData->setting->favicon) }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset($pageGlobalData->setting->favicon) }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset($pageGlobalData->setting->favicon) }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ !empty($pageGlobalData->setting) ? $pageGlobalData->setting->favicon : null }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ !empty($pageGlobalData->setting) ? $pageGlobalData->setting->favicon : null }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ !empty($pageGlobalData->setting) ? $pageGlobalData->setting->favicon : null }}">
 
     <link rel="manifest" href="frontAssets/images/favicons/site.webmanifest">
     <meta name="description" content="Agrikon HTML Template For Agriculture Farm & Farmers">
