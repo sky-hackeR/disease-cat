@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Models\SiteInfo as Setting;
 use App\Models\Swiper;
+use App\Models\Banner;
 
 
 
@@ -25,8 +26,10 @@ class PageController extends Controller
 {
     public function welcome() {
         $swipers = Swiper::all();
+        $banners = Banner::all();
         return view('welcome',[
             'swipers' => $swipers, 
+            'banners' => $banners
         ]);
     }
 }

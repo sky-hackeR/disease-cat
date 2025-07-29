@@ -106,7 +106,7 @@
                                                         </div>
 
                                                         <div class="modal-body">
-                                                            <form action="{{ url('/admin/updateSwiper') }}" method="POST" enctype="multipart/form-data">
+                                                            <form action="{{ url('/admin/editSwiper') }}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input type="hidden" name="swiper_id" value="{{ $swiper->id }}">
 

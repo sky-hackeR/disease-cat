@@ -43,4 +43,9 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/addBanner', [App\Http\Controllers\Admin\AdminController::class, 'addBanner'])->name('addBanner')->middleware(['auth:admin']);
   Route::post('/editBanner', [App\Http\Controllers\Admin\AdminController::class, 'editBanner'])->name('editBanner')->middleware(['auth:admin']);
   Route::post('/deleteBanner', [App\Http\Controllers\Admin\AdminController::class, 'deleteBanner'])->name('deleteBanner')->middleware(['auth:admin']);
+
+  Route::get('/about', [App\Http\Controllers\Admin\AdminController::class, 'about'])->name('about')->middleware(['auth:admin']);
+  Route::post('/updateAbout', [App\Http\Controllers\Admin\AdminController::class, 'updateAbout'])->name('updateAbout')->middleware(['auth:admin']);
+  Route::post('/deleteAbout', [App\Http\Controllers\Admin\AdminController::class, 'deleteAbout'])->name('deleteAbout')->middleware(['auth:admin']);
+
 });

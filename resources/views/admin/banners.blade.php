@@ -47,30 +47,73 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title mb-4">Current Banners</h4>
-                        <form action="{{ url('/admin/editBanner') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="banner_id" value="{{ $banner->id }}">
+                        <div class="accordion" id="bannerAccordion">
 
-                            <div class="row">
-                                @foreach (['home', 'about', 'project', 'service', 'blog'] as $section)
-                                    <div class="col-md-6 mb-4">
-                                        <label class="form-label text-capitalize">{{ $section }} Banner</label>
-                                        <div class="mb-2">
-                                            <img src="{{ $banner[$section.'_banner'] ?? '' }}" class="img-fluid rounded shadow" style="max-height: 150px;">
+                            @foreach (['home', 'about', 'project', 'service', 'blog'] as $index => $section)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading{{ $index }}">
+                                        <button class="accordion-button fw-medium {{ $index > 0 ? 'collapsed' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="collapse{{ $index }}">
+                                            {{ ucfirst($section) }} Banner
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" aria-labelledby="heading{{ $index }}" data-bs-parent="#bannerAccordion">
+                                        <div class="accordion-body">
+
+                                            <div class="row">
+                                                <!-- Left: Current Image Preview -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label fw-semibold">Current Banner</label>
+                                                    <div class="border rounded p-2 bg-light text-center">
+                                                        @if($banner[$section . '_banner'])
+                                                            <img src="{{ $banner[$section.'_banner'] }}" class="img-fluid rounded shadow" style="max-height: 180px;">
+                                                        @else
+                                                            <p class="text-muted">No banner uploaded yet.</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <!-- Right: Update/Delete -->
+                                                <div class="col-md-6 mb-3">
+                                                    <!-- Update Form -->
+                                                    <form action="{{ url('/admin/editBanner') }}" method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" name="banner_id" value="{{ $banner->id }}">
+                                                        <input type="hidden" name="banner_type" value="{{ $section }}">
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Replace {{ ucfirst($section) }} Banner</label>
+                                                            <input type="file" name="{{ $section }}_banner" class="form-control" accept="image/*">
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-success w-100 mb-2">Update</button>
+                                                    </form>
+
+                                                    @if($banner[$section . '_banner'])
+                                                        <!-- Delete Form (Not nested) -->
+                                                        <form action="{{ url('/admin/deleteBanner') }}" method="POST" onsubmit="return confirm('Delete this banner?')">
+                                                            @csrf
+                                                            <input type="hidden" name="banner_id" value="{{ $banner->id }}">
+                                                            <input type="hidden" name="banner_type" value="{{ $section }}">
+                                                            <button type="submit" class="btn btn-outline-danger w-100">Delete</button>
+                                                        </form>
+                                                    @endif
+                                                </div>
+
+                                            </div>
+
                                         </div>
-                                        <input type="file" name="{{ $section }}_banner" class="form-control">
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
 
-                            <div class="text-end mt-3">
-                                <button type="submit" class="btn btn-success">Update Banners</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         @endif
+
+
+
     </div>
 
 

@@ -16,6 +16,7 @@ use App\Models\Social;
 use App\Models\Admin;
 use App\Models\Swiper;
 use App\Models\Banner;
+use App\Models\About;
 
 
 use SweetAlert;
@@ -54,6 +55,13 @@ class AdminController extends Controller
         $contacts = ContactInfo::get();
         return view('admin.contacts', [
             'contacts' => $contacts
+        ]);
+    }
+
+    public function about(){
+        $about = About::get();
+        return view('admin.about', [
+            'about' => $about
         ]);
     }
 
@@ -160,13 +168,60 @@ class AdminController extends Controller
         $swiper = Swiper::find($request->swiper_id);
 
         if ($swiper->delete()) {
-            alert()->success('Deleted', 'Swiper soft-deleted successfully')->persistent('Close');
+            alert()->success('Deleted', 'Swiper deleted successfully')->persistent('Close');
             return redirect()->back();
         }
 
         alert()->error('Oops!', 'Something went wrong')->persistent('Close');
         return redirect()->back();
     }
+
+    public function editSwiper(Request $request){
+        // Validate request
+        $validator = Validator::make($request->all(), [
+            'swiper_id' => 'required|exists:swipers,id',
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Validation Error', $validator->messages()->first())->persistent('Close');
+            return redirect()->back();
+        }
+
+        // Fetch the swiper record
+        $swiper = Swiper::find($request->swiper_id);
+        if (!$swiper) {
+            alert()->error('Not Found', 'The swiper slide you are trying to edit does not exist.')->persistent('Close');
+            return redirect()->back();
+        }
+
+        // Update title and subtitle
+        $swiper->title = $request->title;
+        $swiper->subtitle = $request->subtitle;
+
+        // If new image is uploaded, upload to Cloudinary
+        if ($request->hasFile('image')) {
+            try {
+                $imagePath = cloudinary()->uploadFile($request->file('image')->getRealPath())->getSecurePath();
+                $swiper->image = $imagePath;
+            } catch (\Exception $e) {
+                alert()->error('Image Upload Failed', 'Could not upload image: ' . $e->getMessage())->persistent('Close');
+                return redirect()->back();
+            }
+        }
+
+        // Save the changes
+        if ($swiper->save()) {
+            alert()->success('Success', 'Swiper updated successfully')->persistent('Close');
+        } else {
+            alert()->error('Oops!', 'Something went wrong while updating')->persistent('Close');
+        }
+
+        return redirect()->back();
+    }
+
 
 
     public function addBanner(Request $request){
@@ -183,7 +238,8 @@ class AdminController extends Controller
             return redirect()->back();
         }
 
-        $banner = new Banner();
+        // Only get the first or create if it doesn't exist
+        $banner = Banner::first() ?? new Banner();
 
         foreach (['home_banner', 'about_banner', 'project_banner', 'service_banner', 'blog_banner'] as $field) {
             if ($request->hasFile($field)) {
@@ -192,9 +248,10 @@ class AdminController extends Controller
         }
 
         $banner->save();
-        alert()->success('Success', 'Banners added successfully')->persistent('Close');
+        alert()->success('Success', 'Banners saved successfully')->persistent('Close');
         return redirect()->back();
     }
+
 
     public function editBanner(Request $request){
         $banner = Banner::find($request->banner_id);
@@ -204,28 +261,42 @@ class AdminController extends Controller
             return redirect()->back();
         }
 
-        foreach (['home_banner', 'about_banner', 'project_banner', 'service_banner', 'blog_banner'] as $field) {
-            if ($request->hasFile($field)) {
-                $banner->$field = cloudinary()->uploadFile($request->file($field)->getRealPath())->getSecurePath();
-            }
+        $field = $request->input('banner_type'); // example: "home"
+
+        $fieldKey = $field . '_banner';
+
+        if ($request->hasFile($fieldKey)) {
+            $banner->$fieldKey = cloudinary()->uploadFile($request->file($fieldKey)->getRealPath())->getSecurePath();
+            $banner->save();
+            alert()->success('Updated', ucfirst($field).' banner updated')->persistent('Close');
+        } else {
+            alert()->info('No Change', 'No file uploaded for update')->persistent('Close');
         }
 
-        $banner->save();
-        alert()->success('Updated', 'Banners updated successfully')->persistent('Close');
         return redirect()->back();
     }
+
 
     public function deleteBanner(Request $request){
-        $banner = Banner::find($request->banner_id);
+        $banner = Banner::findOrFail($request->banner_id);
+        $type = $request->banner_type . '_banner';
 
-        if ($banner && $banner->delete()) {
-            alert()->success('Deleted', 'Banner deleted')->persistent('Close');
-        } else {
-            alert()->error('Error', 'Unable to delete')->persistent('Close');
+        if (!in_array($type, ['home_banner', 'about_banner', 'project_banner', 'service_banner', 'blog_banner'])) {
+            return back()->with('error', 'Invalid banner type.');
         }
 
-        return redirect()->back();
+        // Delete file from storage if needed
+        if ($banner->$type && file_exists(public_path($banner->$type))) {
+            unlink(public_path($banner->$type));
+        }
+
+        $banner->$type = null;
+        $banner->save();
+
+        return back()->with('success', ucfirst($request->banner_type) . ' banner removed.');
     }
+
+
 
     
 
