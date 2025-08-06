@@ -77,28 +77,17 @@
                                 <a href="{{ url('/') }}">Home</a>
                             </li>
                             <li>
-                                <a href="about.html">About</a>
+                                <a href="{{ url('/about') }}">About</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url('/services') }}">Services</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#">Pages</a>
                                 <ul>
                                     <li><a href="services.html">Services</a></li>
                                     <li><a href="service-details.html">Service Details</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="projects.html">Projects</a>
-                                <ul>
-                                    <li><a href="projects.html">Projects</a></li>
-                                    <li><a href="project-details.html">Projects Details</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="blog.html">News</a>
-                                <ul>
-                                    <li><a href="blog.html">News</a></li>
-                                    <li><a href="blog-details.html">News Details</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -167,9 +156,8 @@
                                 <ul class="list-unstyled footer-widget__links">
                                     <li><a href="#">Our Projects</a></li>
                                     <li><a href="#">About us</a></li>
-                                    <li><a href="#">New Campaign</a></li>
-                                    <li><a href="#">Upcoming Events</a></li>
-                                    <li><a href="#">Volunteers</a></li>
+                                    <li><a href="#">Our Services</a></li>
+                                    <li><a href="#">Contact us</a></li>
                                 </ul>
                                 <!-- /.list-unstyled -->
                             </div>
@@ -177,30 +165,6 @@
                         </div>
                         <!-- /.col-sm-12 col-md-6 col-lg-2 -->
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                            <div class="footer-widget">
-                                <h3 class="footer-widget__title">News</h3>
-                                <!-- /.footer-widget__title -->
-                                <ul class="list-unstyled footer-widget__post">
-                                    <li>
-                                        <img src="frontAssets/images/resources/footer-post-1.png" alt="" />
-                                        <div class="footer-widget__post-content">
-                                            <span>Nov 16, 2020</span>
-                                            <h4><a href="blog-details.html">How to grow vagetables in the forms</a></h4>
-                                        </div>
-                                        <!-- /.footer-widget__post-content -->
-                                    </li>
-                                    <li>
-                                        <img src="frontAssets/images/resources/footer-post-2.png" alt="" />
-                                        <div class="footer-widget__post-content">
-                                            <span>Nov 16, 2020</span>
-                                            <h4><a href="blog-details.html">How to grow vagetables in the forms</a></h4>
-                                        </div>
-                                        <!-- /.footer-widget__post-content -->
-                                    </li>
-                                </ul>
-                                <!-- /.list-unstyled footer-widget__post -->
-                            </div>
-                            <!-- /.footer-widget -->
                         </div>
                         <!-- /.col-sm-12 col-md-6 col-lg-3 -->
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
@@ -293,23 +257,6 @@
             <!-- /.mobile-nav__content -->
         </div>
         <!-- /.mobile-nav__wrapper -->
-
-        <div class="search-popup">
-            <div class="search-popup__overlay search-toggler"></div>
-            <!-- /.search-popup__overlay -->
-            <div class="search-popup__content">
-                <form action="#">
-                    <label for="search" class="sr-only">search here</label>
-                    <!-- /.sr-only -->
-                    <input type="text" id="search" placeholder="Search Here..." />
-                    <button type="submit" aria-label="search submit" class="thm-btn">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </form>
-            </div>
-            <!-- /.search-popup__content -->
-        </div>
-        <!-- /.search-popup -->
 
         <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
 

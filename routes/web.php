@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\PageController::class, 'welcome'])->name('welcome');
+Route::get('/services/{slug}', [App\Http\Controllers\PageController::class, 'viewService'])->name('viewService');
+Route::get('/about', [App\Http\Controllers\PageController::class, 'about'])->name('about');
+
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/', [App\Http\Controllers\Admin\Auth\LoginController::class, 'showLoginForm'])->name('admin.login');
@@ -46,6 +49,10 @@ Route::group(['prefix' => 'admin'], function () {
 
   Route::get('/about', [App\Http\Controllers\Admin\AdminController::class, 'about'])->name('about')->middleware(['auth:admin']);
   Route::post('/updateAbout', [App\Http\Controllers\Admin\AdminController::class, 'updateAbout'])->name('updateAbout')->middleware(['auth:admin']);
-  Route::post('/deleteAbout', [App\Http\Controllers\Admin\AdminController::class, 'deleteAbout'])->name('deleteAbout')->middleware(['auth:admin']);
+
+  Route::get('/services', [App\Http\Controllers\Admin\AdminController::class, 'services'])->name('services')->middleware(['auth:admin']);
+  Route::post('/addService', [App\Http\Controllers\Admin\AdminController::class, 'addService'])->name('addService')->middleware(['auth:admin']);
+  Route::post('/editService', [App\Http\Controllers\Admin\AdminController::class, 'editService'])->name('editService')->middleware(['auth:admin']);
+  Route::post('/deleteService', [App\Http\Controllers\Admin\AdminController::class, 'deleteService'])->name('deleteService')->middleware(['auth:admin']);
 
 });

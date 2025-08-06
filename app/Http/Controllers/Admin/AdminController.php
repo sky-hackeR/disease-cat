@@ -17,6 +17,7 @@ use App\Models\Admin;
 use App\Models\Swiper;
 use App\Models\Banner;
 use App\Models\About;
+use App\Models\Service;
 
 
 use SweetAlert;
@@ -59,9 +60,16 @@ class AdminController extends Controller
     }
 
     public function about(){
-        $about = About::get();
+        $about = About::first();
         return view('admin.about', [
             'about' => $about
+        ]);
+    }
+
+    public function services(){
+        $services = Service::all();
+        return view('admin.services', [
+            'services' => $services
         ]);
     }
 
@@ -298,6 +306,163 @@ class AdminController extends Controller
 
 
 
-    
+    public function addService(Request $request){
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image_2' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
 
+        if ($validator->fails()) {
+            alert()->error('Validation Error', $validator->messages()->first())->persistent('Close');
+            return redirect()->back();
+        }
+
+        try {
+            $imagePath1 = cloudinary()->uploadFile($request->file('image')->getRealPath())->getSecurePath();
+            $imagePath2 = cloudinary()->uploadFile($request->file('image_2')->getRealPath())->getSecurePath();
+        } catch (\Exception $e) {
+            alert()->error('Upload Failed', 'Could not upload image(s): ' . $e->getMessage())->persistent('Close');
+            return redirect()->back();
+        }
+
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->title)));
+
+        $newService = new Service();
+        $newService->title = $request->title;
+        $newService->description = $request->description;
+        $newService->slug = $slug;
+        $newService->image = $imagePath1;
+        $newService->image_2 = $imagePath2;
+
+        if ($newService->save()) {
+            alert()->success('Success', 'Service added successfully')->persistent('Close');
+        } else {
+            alert()->error('Oops!', 'Something went wrong while saving')->persistent('Close');
+        }
+
+        return redirect()->back();
+    }
+
+    public function editService(Request $request){
+        $validator = Validator::make($request->all(), [
+            'service_id' => 'required|exists:services,id',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Validation Error', $validator->messages()->first())->persistent('Close');
+            return redirect()->back();
+        }
+
+        $service = Service::find($request->service_id);
+        if (!$service) {
+            alert()->error('Not Found', 'Service not found')->persistent('Close');
+            return redirect()->back();
+        }
+
+        if ($request->filled('title') && $request->title !== $service->title) {
+            $service->title = $request->title;
+            $service->slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->title)));
+        }
+
+        if ($request->filled('description')) {
+            $service->description = $request->description;
+        }
+
+        if ($request->hasFile('image')) {
+            try {
+                $imagePath = cloudinary()->uploadFile($request->file('image')->getRealPath())->getSecurePath();
+                $service->image = $imagePath;
+            } catch (\Exception $e) {
+                alert()->error('Image Upload Failed', 'Could not upload image: ' . $e->getMessage())->persistent('Close');
+                return redirect()->back();
+            }
+        }
+
+        if ($request->hasFile('image_2')) {
+            try {
+                $imagePath2 = cloudinary()->uploadFile($request->file('image_2')->getRealPath())->getSecurePath();
+                $service->image_2 = $imagePath2;
+            } catch (\Exception $e) {
+                alert()->error('Image Upload Failed', 'Could not upload second image: ' . $e->getMessage())->persistent('Close');
+                return redirect()->back();
+            }
+        }
+
+        if ($service->save()) {
+            alert()->success('Success', 'Service updated successfully')->persistent('Close');
+        } else {
+            alert()->error('Oops!', 'Something went wrong while updating')->persistent('Close');
+        }
+
+        return redirect()->back();
+    }
+    
+    public function deleteService(Request $request){
+        $validator = Validator::make($request->all(), [
+            'service_id' => 'required|exists:services,id',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Error', $validator->messages()->all()[0])->persistent('Close');
+            return redirect()->back();
+        }
+
+        $service = Service::find($request->service_id);
+        if (!$service) {
+            alert()->error('Oops', 'Invalid Service')->persistent('Close');
+            return redirect()->back();
+        }
+
+        if ($service->delete()) {
+            alert()->success('Deleted', 'Service deleted successfully')->persistent('Close');
+            return redirect()->back();
+        }
+
+        alert()->error('Oops!', 'Could not delete service')->persistent('Close');
+        return redirect()->back();
+    }
+
+
+
+    public function updateAbout(Request $request){
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'values' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            alert()->error('Validation Error', $validator->messages()->first())->persistent('Close');
+            return redirect()->back();
+        }
+
+        // Find the first About entry or create a new one
+        $about = About::first() ?? new About();
+
+        $about->title = $request->title;
+        $about->description = $request->description;
+        $about->values = $request->values;
+
+        // Handle image upload if provided
+        if ($request->hasFile('image')) {
+            // Example using Cloudinary
+            $imagePath = cloudinary()->uploadFile($request->file('image')->getRealPath())->getSecurePath();
+            $about->image = $imagePath;
+        }
+
+        if ($about->save()) {
+            alert()->success('Success', 'About page updated successfully!')->persistent('Close');
+        } else {
+            alert()->error('Oops!', 'Something went wrong while saving')->persistent('Close');
+        }
+
+        return redirect()->back();
+    }
 }

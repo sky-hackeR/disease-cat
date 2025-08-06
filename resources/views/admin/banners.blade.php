@@ -73,6 +73,32 @@
                                                 </div>
 
                                                 <!-- Right: Update/Delete -->
+                                                {{-- <div class="col-md-6 mb-3">
+                                                    <!-- Update Form -->
+                                                    <form action="{{ url('/admin/editBanner') }}" method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" name="banner_id" value="{{ $banner->id }}">
+                                                        <input type="hidden" name="banner_type" value="{{ $section }}">
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Replace {{ ucfirst($section) }} Banner</label>
+                                                            <input type="file" name="{{ $section }}_banner" class="form-control" accept="image/*">
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-success w-50 mb-2">Update</button>
+                                                    </form>
+
+                                                    @if($banner[$section . '_banner'])
+                                                        <!-- Delete Form (Not nested) -->
+                                                        <form action="{{ url('/admin/deleteBanner') }}" method="POST" onsubmit="return confirm('Delete this banner?')">
+                                                            @csrf
+                                                            <input type="hidden" name="banner_id" value="{{ $banner->id }}">
+                                                            <input type="hidden" name="banner_type" value="{{ $section }}">
+                                                            <button type="submit" class="btn btn-outline-danger w-50">Delete</button>
+                                                        </form>
+                                                    @endif
+                                                </div> --}}
+
                                                 <div class="col-md-6 mb-3">
                                                     <!-- Update Form -->
                                                     <form action="{{ url('/admin/editBanner') }}" method="POST" enctype="multipart/form-data">
@@ -85,16 +111,22 @@
                                                             <input type="file" name="{{ $section }}_banner" class="form-control" accept="image/*">
                                                         </div>
 
-                                                        <button type="submit" class="btn btn-success w-100 mb-2">Update</button>
+                                                        <!-- Flex wrapper to push button to the right -->
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-success w-50 mb-2">Update</button>
+                                                        </div>
                                                     </form>
 
                                                     @if($banner[$section . '_banner'])
-                                                        <!-- Delete Form (Not nested) -->
+                                                        <!-- Delete Form -->
                                                         <form action="{{ url('/admin/deleteBanner') }}" method="POST" onsubmit="return confirm('Delete this banner?')">
                                                             @csrf
                                                             <input type="hidden" name="banner_id" value="{{ $banner->id }}">
                                                             <input type="hidden" name="banner_type" value="{{ $section }}">
-                                                            <button type="submit" class="btn btn-outline-danger w-100">Delete</button>
+                                                            <!-- Align delete button to the right as well (optional) -->
+                                                            <div class="d-flex justify-content-end">
+                                                                <button type="submit" class="btn btn-outline-danger w-50">Delete</button>
+                                                            </div>
                                                         </form>
                                                     @endif
                                                 </div>

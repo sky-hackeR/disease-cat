@@ -162,9 +162,7 @@
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ url('/admin/about') }}" key="t-saas">About</a></li>
                                     <li><a href="{{ url('/admin/contacts') }}" key="t-saas">Contact Information</a></li>
-                                    <li><a href="{{ url('/admin/service') }}" key="t-saas">Service</a></li>
-                                    <li><a href="{{ url('/admin/certificate') }}" key="t-saas">Certificate</a></li>
-                                    <li><a href="{{ url('/admin/counter') }}" key="t-saas">Counter</a></li>
+                                    <li><a href="{{ url('/admin/services') }}" key="t-saas">Service</a></li>
 
                                 </ul>
                             </li>
